@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // Header container
 export const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 20px;
   background-color: #333;
