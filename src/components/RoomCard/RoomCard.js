@@ -1,17 +1,40 @@
 // src/components/RoomCard.js
-import React from 'react';
-import { RoomCardContainer, RoomCardButton } from './styles';
+import React, { useState } from "react";
+import {
+  RoomCardContainer,
+  RoomCardButton,
+  RoomInfo,
+  RoomHeader,
+} from "./styles";
+
+// Компонент для отображения заголовка комнаты
+const RoomTitle = ({ name }) => <h3>{name}</h3>;
+
+// Компонент для отображения информации о комнате
+const RoomDetails = ({ label, value }) => (
+  <RoomInfo>
+    <strong>{label}:</strong> {value}
+  </RoomInfo>
+);
 
 const RoomCard = ({ room }) => {
+  const [isJoined, setIsJoined] = useState(false);
+
+  const handleJoinClick = () => {
+    setIsJoined(true);
+  };
+
   return (
     <RoomCardContainer>
-      <h3>{room.name}</h3>
-      <p><strong>Location:</strong> {room.location}</p>
-      <p><strong>Players:</strong> {room.playerCount}/18</p>
-      <p><strong>Date & Time:</strong> {room.dateTime}</p>
-      <p><strong>Organization:</strong> {room.organization}</p>
-      <p><strong>Price:</strong> ${room.price}</p>
-      <RoomCardButton>Join</RoomCardButton>
+      <RoomTitle name={room.name} />
+      <RoomDetails label="Location" value={room.location} />
+      <RoomDetails label="Players" value={`${room.playerCount}/18`} />
+      <RoomDetails label="Date & Time" value={room.dateTime} />
+      <RoomDetails label="Organization" value={room.organization} />
+      <RoomDetails label="Price" value={`$${room.price}`} />
+      <RoomCardButton onClick={handleJoinClick} isJoined={isJoined}>
+        {isJoined ? "Joined" : "Join"}
+      </RoomCardButton>
     </RoomCardContainer>
   );
 };
